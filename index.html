@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI人工智能展望 - 科技感未来风格</title>
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===========================================
+           VIEWPORT FITTING: MANDATORY BASE STYLES
+           =========================================== */
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 100%;
+            overflow: hidden;
+            padding: var(--slide-padding);
+        }
+        :root {
+            --title-size: clamp(1.5rem, 5vw, 4rem);
+            --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+            --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+            --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+            --small-size: clamp(0.65rem, 1vw, 0.875rem);
+            --slide-padding: clamp(1rem, 4vw, 4rem);
+            --content-gap: clamp(0.5rem, 2vw, 2rem);
+            --element-gap: clamp(0.25rem, 1vw, 1rem);
+        }
+        .card, .container, .content-box {
+            max-width: min(90vw, 1000px);
+            max-height: min(80vh, 700px);
+        }
+        .feature-list, .bullet-list {
+            gap: clamp(0.4rem, 1vh, 1rem);
+        }
+        .feature-list li, .bullet-list li {
+            font-size: var(--body-size);
+            line-height: 1.4;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(0.5rem, 1.5vw, 1rem);
+        }
+        img, .image-container {
+            max-width: 100%;
+            max-height: min(50vh, 400px);
+            object-fit: contain;
+        }
+        @media (max-height: 700px) {
+            :root {
+                --slide-padding: clamp(0.75rem, 3vw, 2rem);
+                --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+                --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+                --h2-size: clamp(1rem, 3vw, 1.75rem);
+            }
+        }
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+                --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+                --title-size: clamp(1.1rem, 4vw, 2rem);
+                --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+            }
+            .nav-dots, .keyboard-hint, .decorative {
+                display: none;
+            }
+        }
+        @media (max-height: 500px) {
+            :root {
+                --slide-padding: clamp(0.4rem, 2vw, 1rem);
+                --title-size: clamp(1rem, 3.5vw, 1.5rem);
+                --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+                --body-size: clamp(0.65rem, 1vw, 0.85rem);
+            }
+        }
+        @media (max-width: 600px) {
+            :root {
+                --title-size: clamp(1.25rem, 7vw, 2.5rem);
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* ===========================================
+           THEME: NEON CYBER / TECH FUTURE STYLE
+           =========================================== */
+        :root {
+            --bg-primary: #0a0f1c;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.8);
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #00ffcc;
+            --accent-magenta: #ff00aa;
+            --accent-blue: #00ccff;
+            --accent-glow: rgba(0, 255, 204, 0.3);
+            --border: rgba(0, 255, 204, 0.2);
+            --font-display: 'Clash Display', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===========================================
+           BACKGROUND EFFECTS
+           =========================================== */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .glow-orb.cyan {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-cyan);
+            top: -100px;
+            right: -100px;
+        }
+        .glow-orb.magenta {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-magenta);
+            bottom: -50px;
+            left: -50px;
+        }
+
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* ===========================================
+           NAVIGATION
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: clamp(1rem, 3vw, 2rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 1000;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 255, 204, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            box-shadow: 0 0 10px transparent;
+        }
+        .nav-dot.active {
+            background: var(--accent-cyan);
+            box-shadow: 0 0 20px var(--accent-cyan);
+            transform: scale(1.2);
+        }
+        .nav-dot:hover {
+            background: var(--accent-blue);
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-magenta));
+            z-index: 1001;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* ===========================================
+           UTILITY CLASSES
+           =========================================== */
+        .mono {
+            font-family: var(--font-mono);
+        }
+        .text-cyan { color: var(--accent-cyan); }
+        .text-magenta { color: var(--accent-magenta); }
+        .text-blue { color: var(--accent-blue); }
+        .glow-text {
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        .border-glow {
+            border: 1px solid var(--border);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.1), inset 0 0 20px rgba(0, 255, 204, 0.05);
+        }
+
+        /* ===========================================
+           SLIDE STYLES
+           =========================================== */
+        
+        /* Slide 1: Title */
+        .slide-title {
+            background: var(--bg-primary);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .slide-title .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            margin-bottom: 2rem;
+        }
+        .slide-title .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        .slide-title h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .slide-title .subtitle {
+            font-family: var(--font-mono);
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+        .slide-title .glitch-text {
+            position: relative;
+        }
+
+        /* Slide 2: What is AI */
+        .slide-intro {
+            background: var(--bg-secondary);
+        }
+        .slide-intro h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+        }
+        .slide-intro h2 .mono {
+            color: var(--accent-cyan);
+        }
+        .slide-intro .content-text {
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.8;
+        }
+        .slide-intro .highlight {
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        /* Slide 3-6: Timeline/History */
+        .slide-timeline {
+            background: var(--bg-primary);
+        }
+        .slide-timeline h2 {
+            font-size: var(--h2-size);
+            margin-bottom: 2rem;
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta));
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        .timeline-year {
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-title {
+            font-size: var(--body-size);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-desc {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+        }
+
+        /* Slide 7: Current State */
+        .slide-current {
+            background: var(--bg-secondary);
+        }
+        .slide-current h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+            text-align: center;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .tech-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+        }
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .tech-name {
+            font-size: var(--body-size);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tech-desc {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+        }
+
+        /* Slide 8: Capabilities */
+        .slide-capabilities {
+            background: var(--bg-primary);
+        }
+        .slide-capabilities h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+        }
+        .capability-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 600px;
+        }
+        .capability-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-cyan);
+        }
+        .capability-num {
+            font-family: var(--font-mono);
+            font-size: var(--h3-size);
+            color: var(--accent-cyan);
+            min-width: 2rem;
+        }
+        .capability-text {
+            font-size: var(--body-size);
+        }
+
+        /* Slide 9: Stats */
+        .slide-stats {
+            background: var(--bg-secondary);
+        }
+        .slide-stats h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+            text-align: center;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        .stat-label {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Slide 10: Applications */
+        .slide-apps {
+            background: var(--bg-primary);
+        }
+        .slide-apps h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+        }
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 800px;
+        }
+        .app-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+        }
+        .app-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .app-content h4 {
+            font-size: var(--body-size);
+            margin-bottom: 0.25rem;
+        }
+        .app-content p {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+        }
+
+        /* Slide 11: Future Vision */
+        .slide-future {
+            background: var(--bg-secondary);
+        }
+        .slide-future h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+        }
+        .future-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 700px;
+        }
+        .future-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        .future-marker {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent-magenta);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            box-shadow: 0 0 10px rgba(255, 0, 170, 0.3);
+        }
+        .future-content h4 {
+            font-size: var(--body-size);
+            color: var(--accent-magenta);
+            margin-bottom: 0.25rem;
+        }
+        .future-content p {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+        }
+
+        /* Slide 12: Challenges */
+        .slide-challenges {
+            background: var(--bg-primary);
+        }
+        .slide-challenges h2 {
+            font-size: var(--h2-size);
+            margin-bottom: var(--content-gap);
+            text-align: center;
+        }
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .challenge-card {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .challenge-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .challenge-title {
+            font-size: var(--body-size);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--accent-magenta);
+        }
+        .challenge-desc {
+            font-size: var(--small-size);
+            color: var(--text-secondary);
+        }
+
+        /* Slide 13: Closing */
+        .slide-closing {
+            background: var(--bg-primary);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .slide-closing h2 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .slide-closing .tagline {
+            font-family: var(--font-mono);
+            font-size: var(--body-size);
+            color: var(--text-secondary);
+            letter-spacing: 0.1em;
+        }
+        .slide-closing .cta-box {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            border: 1px solid var(--accent-cyan);
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+        }
+
+        /* Page number */
+        .page-num {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 2rem;
+            font-family: var(--font-mono);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow-orb cyan"></div>
+    <div class="glow-orb magenta"></div>
+    <div class="progress-bar" id="progressBar"></div>
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- Slide 1: Title -->
+    <section class="slide slide-title">
+        <div class="slide-content">
+            <div class="badge reveal">SYSTEM.ONLINE</div>
+            <h1 class="reveal">AI 人工智能</h1>
+            <p class="subtitle reveal">THE FUTURE IS NOW</p>
+        </div>
+        <span class="page-num">01</span>
+    </section>
+
+    <!-- Slide 2: What is AI -->
+    <section class="slide slide-intro">
+        <div class="slide-content">
+            <h2 class="reveal">什么是 <span class="mono">AI</span>?</h2>
+            <p class="content-text reveal">
+                人工智能（Artificial Intelligence）是计算机科学的一个分支，致力于创造能够<span class="highlight">模拟人类智能</span>的系统。从机器学习到深度学习，从自然语言处理到计算机视觉，AI 正在重塑我们理解世界的方式。
+            </p>
+        </div>
+        <span class="page-num">02</span>
+    </section>
+
+    <!-- Slide 3: History Timeline -->
+    <section class="slide slide-timeline">
+        <div class="slide-content">
+            <h2 class="reveal">发展历程</h2>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-year">1956</div>
+                    <div class="timeline-title">AI 概念诞生</div>
+                    <div class="timeline-desc">达特茅斯会议首次提出"人工智能"术语</div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-year">1997</div>
+                    <div class="timeline-title">深蓝战胜卡斯帕罗夫</div>
+                    <div class="timeline-desc">IBM 深蓝击败国际象棋世界冠军</div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-year">2012</div>
+                    <div class="timeline-title">深度学习革命</div>
+                    <div class="timeline-desc">AlexNet 在 ImageNet 竞赛中取得突破</div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-title">大模型时代</div>
+                    <div class="timeline-desc">ChatGPT 引发全球 AI 应用浪潮</div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">03</span>
+    </section>
+
+    <!-- Slide 4: Machine Learning -->
+    <section class="slide slide-intro">
+        <div class="slide-content">
+            <h2 class="reveal">机器学习 <span class="mono">Machine Learning</span></h2>
+            <p class="content-text reveal">
+                机器学习是 AI 的核心技术之一，它使计算机能够从<span class="highlight">数据中学习规律</span>，而无需明确编程。通过算法和统计模型，机器可以不断改进其在特定任务上的表现。
+            </p>
+        </div>
+        <span class="page-num">04</span>
+    </section>
+
+    <!-- Slide 5: Deep Learning -->
+    <section class="slide slide-intro">
+        <div class="slide-content">
+            <h2 class="reveal">深度学习 <span class="mono">Deep Learning</span></h2>
+            <p class="content-text reveal">
+                深度学习使用<span class="highlight">神经网络</span>模拟人脑的工作方式。多层神经元结构能够自动提取数据特征，在图像识别、语音识别和自然语言处理等领域取得突破性进展。
+            </p>
+        </div>
+        <span class="page-num">05</span>
+    </section>
+
+    <!-- Slide 6: Neural Networks -->
+    <section class="slide slide-intro">
+        <div class="slide-content">
+            <h2 class="reveal">神经网络 <span class="mono">Neural Networks</span></h2>
+            <p class="content-text reveal">
+                受生物神经元启发，人工神经网络由<span class="highlight">相互连接的节点</span>组成。每个连接都有权重，通过训练调整这些权重，网络能够学习复杂的模式和关系。
+            </p>
+        </div>
+        <span class="page-num">06</span>
+    </section>
+
+    <!-- Slide 7: Current State -->
+    <section class="slide slide-current">
+        <div class="slide-content">
+            <h2 class="reveal">当前技术前沿</h2>
+            <div class="tech-grid">
+                <div class="tech-card reveal">
+                    <div class="tech-icon">🧠</div>
+                    <div class="tech-name">大语言模型</div>
+                    <div class="tech-desc">GPT、Claude、Gemini</div>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">生成式 AI</div>
+                    <div class="tech-desc">图像、视频、音乐生成</div>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">多模态 AI</div>
+                    <div class="tech-desc">文本、图像、语音融合</div>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">边缘 AI</div>
+                    <div class="tech-desc">端侧智能计算</div>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon">🔗</div>
+                    <div class="tech-name">AI Agent</div>
+                    <div class="tech-desc">自主决策智能体</div>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="tech-icon">🔬</div>
+                    <div class="tech-name">科学 AI</div>
+                    <div class="tech-desc">药物发现、材料设计</div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">07</span>
+    </section>
+
+    <!-- Slide 8: Capabilities -->
+    <section class="slide slide-capabilities">
+        <div class="slide-content">
+            <h2 class="reveal">核心能力</h2>
+            <div class="capability-list">
+                <div class="capability-item reveal">
+                    <span class="capability-num">01</span>
+                    <span class="capability-text">自然语言理解与生成</span>
+                </div>
+                <div class="capability-item reveal">
+                    <span class="capability-num">02</span>
+                    <span class="capability-text">计算机视觉与图像识别</span>
+                </div>
+                <div class="capability-item reveal">
+                    <span class="capability-num">03</span>
+                    <span class="capability-text">语音识别与合成</span>
+                </div>
+                <div class="capability-item reveal">
+                    <span class="capability-num">04</span>
+                    <span class="capability-text">预测分析与决策支持</span>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">08</span>
+    </section>
+
+    <!-- Slide 9: Statistics -->
+    <section class="slide slide-stats">
+        <div class="slide-content">
+            <h2 class="reveal">数据洞察</h2>
+            <div class="stats-grid">
+                <div class="stat-box reveal">
+                    <div class="stat-value">$200B</div>
+                    <div class="stat-label">2024 市场规模</div>
+                </div>
+                <div class="stat-box reveal">
+                    <div class="stat-value">37%</div>
+                    <div class="stat-label">年复合增长率</div>
+                </div>
+                <div class="stat-box reveal">
+                    <div class="stat-value">175B</div>
+                    <div class="stat-label">GPT-3 参数量</div>
+                </div>
+                <div class="stat-box reveal">
+                    <div class="stat-value">100M+</div>
+                    <div class="stat-label">ChatGPT 用户数</div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">09</span>
+    </section>
+
+    <!-- Slide 10: Applications -->
+    <section class="slide slide-apps">
+        <div class="slide-content">
+            <h2 class="reveal">行业应用</h2>
+            <div class="apps-grid">
+                <div class="app-item reveal">
+                    <div class="app-icon">🏥</div>
+                    <div class="app-content">
+                        <h4>医疗健康</h4>
+                        <p>疾病诊断、药物研发、个性化治疗</p>
+                    </div>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">🏦</div>
+                    <div class="app-content">
+                        <h4>金融服务</h4>
+                        <p>风险评估、智能投顾、反欺诈</p>
+                    </div>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">🚗</div>
+                    <div class="app-content">
+                        <h4>自动驾驶</h4>
+                        <p>环境感知、路径规划、决策控制</p>
+                    </div>
+                </div>
+                <div class="app-item reveal">
+                    <div class="app-icon">🎓</div>
+                    <div class="app-content">
+                        <h4>教育培训</h4>
+                        <p>个性化学习、智能辅导、自动评测</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">10</span>
+    </section>
+
+    <!-- Slide 11: Future Vision -->
+    <section class="slide slide-future">
+        <div class="slide-content">
+            <h2 class="reveal">未来展望</h2>
+            <div class="future-list">
+                <div class="future-item reveal">
+                    <div class="future-marker"></div>
+                    <div class="future-content">
+                        <h4>通用人工智能 AGI</h4>
+                        <p>具备人类水平的通用认知能力</p>
+                    </div>
+                </div>
+                <div class="future-item reveal">
+                    <div class="future-marker"></div>
+                    <div class="future-content">
+                        <h4>人机协作新范式</h4>
+                        <p>AI 成为人类能力的增强器</p>
+                    </div>
+                </div>
+                <div class="future-item reveal">
+                    <div class="future-marker"></div>
+                    <div class="future-content">
+                        <h4>普惠 AI 时代</h4>
+                        <p>技术民主化，人人可用 AI</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">11</span>
+    </section>
+
+    <!-- Slide 12: Challenges -->
+    <section class="slide slide-challenges">
+        <div class="slide-content">
+            <h2 class="reveal">面临的挑战</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card reveal">
+                    <div class="challenge-icon">⚠️</div>
+                    <div class="challenge-title">伦理与安全</div>
+                    <div class="challenge-desc">确保 AI 发展符合人类价值观</div>
+                </div>
+                <div class="challenge-card reveal">
+                    <div class="challenge-icon">🔒</div>
+                    <div class="challenge-title">数据隐私</div>
+                    <div class="challenge-desc">保护个人数据不被滥用</div>
+                </div>
+                <div class="challenge-card reveal">
+                    <div class="challenge-icon">⚖️</div>
+                    <div class="challenge-title">算法偏见</div>
+                    <div class="challenge-desc">确保 AI 决策公平无歧视</div>
+                </div>
+            </div>
+        </div>
+        <span class="page-num">12</span>
+    </section>
+
+    <!-- Slide 13: Closing -->
+    <section class="slide slide-closing">
+        <div class="slide-content">
+            <h2 class="reveal">未来已来</h2>
+            <p class="tagline reveal">THE FUTURE IS NOW</p>
+            <div class="cta-box reveal">SYSTEM.READY</div>
+        </div>
+        <span class="page-num">13</span>
+    </section>
+
+    <script>
+        /* ===========================================
+           SLIDE PRESENTATION CONTROLLER
+           =========================================== */
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.progressBar = document.getElementById('progressBar');
+                this.navDotsContainer = document.getElementById('navDots');
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.setupProgressBar();
+                this.setupNavDots();
+                this.setupWheelNav();
+            }
+
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            this.currentSlide = Array.from(this.slides).indexOf(entry.target);
+                            this.updateNavDots();
+                            this.updateProgressBar();
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        this.goToSlide(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        this.goToSlide(this.slides.length - 1);
+                    }
+                });
+            }
+
+            setupTouchNav() {
+                let touchStartY = 0;
+                let touchEndY = 0;
+
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+
+                document.addEventListener('touchend', (e) => {
+                    touchEndY = e.changedTouches[0].screenY;
+                    this.handleSwipe(touchStartY, touchEndY);
+                }, { passive: true });
+            }
+
+            handleSwipe(startY, endY) {
+                const threshold = 50;
+                if (startY - endY > threshold) {
+                    this.nextSlide();
+                } else if (endY - startY > threshold) {
+                    this.prevSlide();
+                }
+            }
+
+            setupWheelNav() {
+                let wheelTimeout;
+                document.addEventListener('wheel', (e) => {
+                    if (wheelTimeout) return;
+                    wheelTimeout = setTimeout(() => {
+                        wheelTimeout = null;
+                    }, 800);
+
+                    if (e.deltaY > 0) {
+                        this.nextSlide();
+                    } else {
+                        this.prevSlide();
+                    }
+                }, { passive: true });
+            }
+
+            setupProgressBar() {
+                this.updateProgressBar();
+            }
+
+            updateProgressBar() {
+                const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+                this.progressBar.style.width = `${progress}%`;
+            }
+
+            setupNavDots() {
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'nav-dot';
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                    this.navDotsContainer.appendChild(dot);
+                });
+                this.updateNavDots();
+            }
+
+            updateNavDots() {
+                const dots = this.navDotsContainer.querySelectorAll('.nav-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            nextSlide() {
+                if (this.currentSlide < this.slides.length - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+
+            prevSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+
+            goToSlide(index) {
+                this.slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        new SlidePresentation();
+    </script>
+</body>
+</html>
